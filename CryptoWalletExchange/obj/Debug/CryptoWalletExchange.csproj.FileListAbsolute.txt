@@ -1,0 +1,9 @@
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletExchange\bin\Debug\CryptoWalletExchange.dll
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletExchange\bin\Debug\CryptoWalletExchange.pdb
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletExchange\bin\Debug\Newtonsoft.Json.dll
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletExchange\bin\Debug\Newtonsoft.Json.xml
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletExchange\obj\Debug\CryptoWalletExchange.csprojAssemblyReference.cache
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletExchange\obj\Debug\CryptoWalletExchange.csproj.CoreCompileInputs.cache
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletExchange\obj\Debug\CryptoWalletExchange.csproj.CopyComplete
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletExchange\obj\Debug\CryptoWalletExchange.dll
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletExchange\obj\Debug\CryptoWalletExchange.pdb

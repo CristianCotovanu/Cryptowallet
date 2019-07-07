@@ -1,0 +1,14 @@
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\bin\Debug\CryptoWalletDB.dll.config
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\bin\Debug\CryptoWalletDB.dll
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\bin\Debug\CryptoWalletDB.pdb
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\bin\Debug\EntityFramework.dll
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\bin\Debug\EntityFramework.xml
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\obj\Debug\CryptoWalletDB.csprojAssemblyReference.cache
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\obj\Debug\CryptoWalletDB.csproj.CoreCompileInputs.cache
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\obj\Debug\CryptoWalletDB.csproj.CopyComplete
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\obj\Debug\CryptoWalletDB.dll
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\obj\Debug\CryptoWalletDB.pdb
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\bin\Debug\Newtonsoft.Json.dll
+C:\Users\crist\OneDrive\Desktop\Crypto\CryptoWalletDB\bin\Debug\Newtonsoft.Json.xml

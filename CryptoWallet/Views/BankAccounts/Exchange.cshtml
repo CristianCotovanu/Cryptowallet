@@ -1,0 +1,36 @@
+﻿@model CryptoWallet.Models.ExchangeViewModel
+@{
+    ViewBag.Title = "Exchange";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.FromCurrency, new { @class = "col-md-2 control-label" })
+        @Html.DropDownListFor(m => m.FromCurrency, Model.FromCurrencyList, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.FromCurrency, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ToCurrency, new { @class = "col-md-2 control-label" })
+        @Html.DropDownListFor(m => m.ToCurrency, Model.ToCurrencyList, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ToCurrency, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Amount, new { @class = "col-md-2 control-label" })
+        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Amount, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2">
+            <input type="submit" value="Exchange" class="=" btn btn-default />
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

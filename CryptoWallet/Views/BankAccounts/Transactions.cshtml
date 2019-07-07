@@ -1,0 +1,243 @@
+﻿@model List<TransactionViewModel>
+
+@{
+    ViewBag.Title = "Transactions";
+    List<TransactionViewModel> deposits = Model.Where(t => t.FromUser == t.ToUser && t.FromCurrency == t.ToCurrency).ToList();
+    List<TransactionViewModel> conversions = Model.Where(t => t.FromUser == t.ToUser && t.FromCurrency != t.ToCurrency).ToList();
+    List<TransactionViewModel> outgoingTransactions = Model.Where(t => t.FromUser == User.Identity.Name && t.FromCurrency == t.ToCurrency && t.FromUser != t.ToUser).ToList();
+    List<TransactionViewModel> incomingTransactions = Model.Where(t => t.ToUser == User.Identity.Name && t.FromCurrency == t.ToCurrency && t.FromUser != t.ToUser).ToList();
+}
+<br />
+<br />
+
+
+<div id="accordion">
+    @if (deposits.Count == 0)
+    {
+
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        Deposits
+                    </button>
+                </h5>
+            </div>
+        </div>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                <p>There were made no deposits in your account.</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        Deposits
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date Time</th>
+                                <th>User</th>
+                                <th>Amount</th>
+                                <th>Currency</th>
+                                <th>Rate</th>
+                            </tr>
+                        </thead>
+                        @foreach (TransactionViewModel transaction in deposits)
+                        {
+                            <tr>
+                                <td>@transaction.DateTime</td>
+                                <td>@transaction.FromUser</td>
+                                <td>@transaction.Amount</td>
+                                <td>@transaction.FromCurrency</td>
+                                <td>@transaction.Rate</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    @if (outgoingTransactions.Count == 0)
+    {
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Outgoing Transactions
+                    </button>
+                </h5>
+            </div>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+                <p>There are no outgoing transactions from your account.</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Outgoing Transactions
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date Time</th>
+                                <th>Sent to</th>
+                                <th>Amount</th>
+                                <th>Currency</th>
+                                <th>Rate</th>
+                            </tr>
+                        </thead>
+                        @foreach (TransactionViewModel transaction in outgoingTransactions)
+                        {
+                            <tr>
+                                <td>@transaction.DateTime</td>
+                                <td>@transaction.ToUser</td>
+                                <td>@transaction.Amount</td>
+                                <td>@transaction.FromCurrency</td>
+                                <td>@transaction.Rate</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    @if (incomingTransactions.Count == 0)
+    {
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Incoming Transactions
+                    </button>
+                </h5>
+            </div>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+                <p>There are no incoming transactions to your account.</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Incoming Transactions
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date Time</th>
+                                <th>Received from</th>
+                                <th>Amount</th>
+                                <th>Currency</th>
+                                <th>Rate</th>
+                            </tr>
+                        </thead>
+                        @foreach (TransactionViewModel transaction in incomingTransactions)
+                        {
+                            <tr>
+                                <td>@transaction.DateTime</td>
+                                <td>@transaction.FromUser</td>
+                                <td>@transaction.Amount</td>
+                                <td>@transaction.FromCurrency</td>
+                                <td>@transaction.Rate</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    @if (conversions.Count == 0)
+    {
+        <div class="card">
+            <div class="card-header" id="headingFour">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Exchanges
+                    </button>
+                </h5>
+            </div>
+        </div>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+            <div class="card-body">
+                <p>There were made no exchanges in your account.</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header" id="headingFour">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Exchanges
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date Time</th>
+                                <th>Amount</th>
+                                <th>From Currency</th>
+                                <th>To Currency</th>
+                                <th>Rate</th>
+                            </tr>
+                        </thead>
+                        @foreach (TransactionViewModel transaction in conversions)
+                        {
+                            <tr>
+                                <td>@transaction.DateTime</td>
+                                <td>@transaction.Amount</td>
+                                <td>@transaction.FromCurrency</td>
+                                <td>@transaction.ToCurrency</td>
+                                <td>@transaction.Rate</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

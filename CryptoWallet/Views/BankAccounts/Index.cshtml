@@ -1,0 +1,48 @@
+﻿@model List<CryptoWallet.Models.BankAccountViewModel>
+
+@{
+    ViewBag.Title = "BankAccounts";
+}
+
+<h2>Bank Accounts</h2>
+<br />
+
+@Html.ActionLink("Deposit", "Deposit", "BankAccounts", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Send", "SendTo", "BankAccounts", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Exchange", "Exchange", "BankAccounts", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Open account", "OpenAccount", "BankAccounts", null, new { @class = "btn btn-primary" })
+
+<br />
+<br />
+<br />
+
+@if (Model.Count == 0)
+{
+    <p>You don't have any open account.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Bank Account Id</th>
+                <th>Amount</th>
+                <th>Currency</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        @foreach (CryptoWallet.Models.BankAccountViewModel bankAccount in Model)
+        {
+            <tr>
+                <td>@bankAccount.AccountID</td>
+                <td>@bankAccount.Amount</td>
+                <td>@bankAccount.Currency</td>
+                <td>@bankAccount.TotalAmount</td>
+            </tr>
+        }
+    </table>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
