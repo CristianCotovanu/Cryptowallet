@@ -254,31 +254,26 @@ namespace CryptoWallet.Controllers
             }
         }
 
+        private void SetupOpenAccountViewModel(OpenAccountViewModel viewModel)
+        {
+            string[] currenciesList = { "EUR", "USD", "GBP", "BTC", "XRP" };
+
+            foreach (string u in currenciesList)
+            {
+                viewModel.CurrencyList.Add(new SelectListItem
+                {
+                    Value = u,
+                    Text = u
+                });
+            }
+        }
+
         [HttpGet]
         public ActionResult OpenAccount()
         {
             OpenAccountViewModel viewModel = new OpenAccountViewModel();
-
-            using (CryptoWalletDbContext ctx = new CryptoWalletDbContext())
-            {
-                User currentUser = ctx.Users.AsNoTracking().FirstOrDefault(u => u.Email == User.Identity.Name);
-
-                List<BankAccountViewModel> accounts = ctx.UsersBankAccounts.Where(a => a.UserID == currentUser.UserID)
-                    .Select(u => new BankAccountViewModel
-                    {
-                        AccountID = u.AccountID,
-                        Amount = u.Amount,
-                        Currency = u.Currency
-                    }).ToList();
-            }
-            //sterge din drop down list monedele unde am deja un cont
-            /*viewModel.CurrencyList.AddRange(accounts.Select(a => new SelectListItem
-            {
-                Value = a.AccountID.ToString(),
-                Text = a.Currency + " (" + a.AccountID.ToString() + ')'
-            }));
-            return View(viewModel);*/
-            return null;
+            SetupOpenAccountViewModel(viewModel);
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -288,26 +283,30 @@ namespace CryptoWallet.Controllers
             {
                 User currentUser = ctx.Users.AsNoTracking().FirstOrDefault(u => u.Email == User.Identity.Name);
 
-                UserBankAccount account = ctx.UsersBankAccounts.FirstOrDefault(a => a.Currency == viewModel.NewCurrency && a.UserID == currentUser.UserID);
+                UserBankAccount account = ctx.UsersBankAccounts.FirstOrDefault(a => a.Currency.ToString() == viewModel.NewCurrency.ToString() && a.UserID == currentUser.UserID);
 
                 if (account == null)
                 {
-                    account = new UserBankAccount
+                    UserBankAccount newAccount = new UserBankAccount
                     {
                         Currency = viewModel.NewCurrency,
                         UserID = currentUser.UserID,
                         Amount = 0
                     };
-                    ctx.UsersBankAccounts.Add(account);
+
+                    ctx.UsersBankAccounts.Add(newAccount);
+
+                    ctx.SaveChanges();
+
+                    return RedirectToAction("Index");
                 }
                 else
                 {
+                    ModelState.AddModelError("NewCurrency", "You already have an account in this currency.");
+                    SetupOpenAccountViewModel(viewModel);
                     return View(viewModel);
                 }
-
-                ctx.SaveChanges();
             }
-            return View();
         }
 
         [HttpGet]
@@ -364,7 +363,6 @@ namespace CryptoWallet.Controllers
                     Value = a.Currency,
                     Text = a.Currency + " (" + a.AccountID.ToString() + ')'
                 }));
-
 
                 foreach (string u in currenciesList)
                 {
